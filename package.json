@@ -1,0 +1,45 @@
+{
+	"name": "svelte-gel-auth-teamplate",
+	"packageManager": "pnpm@10.6.4",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"auth:setup": "npx tsx --env-file=.env ./deploy/auth-initialize.ts",
+		"generate:edgeql": "pnpm exec generate edgeql-js",
+		"generate:interfaces": "pnpm exec generate interfaces",
+		"generate:all": "pnpm generate:edgeql && pnpm generate:interfaces"
+	},
+	"devDependencies": {
+		"@gel/generate": "^0.6.2",
+		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/kit": "^2.16.0",
+		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@types/node": "^22.13.10",
+		"autoprefixer": "^10.4.21",
+		"daisyui": "^5.0.9",
+		"postcss": "^8.5.3",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
+		"tailwindcss": "^4.0.15",
+		"typescript": "^5.0.0",
+		"vite": "^6.0.0"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	},
+	"dependencies": {
+		"@gel/auth-sveltekit": "^0.3.0",
+		"@tailwindcss/vite": "^4.0.15",
+		"gel": "^2.0.1",
+		"tsx": "^4.19.3"
+	}
+}
