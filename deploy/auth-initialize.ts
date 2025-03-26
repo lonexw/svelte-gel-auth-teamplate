@@ -21,11 +21,11 @@ ${RESET_CONFIG} cfg::SMTPProviderConfig;
 `;
 
 const SETUP_AUTH_CONFIG = `
-${SET_CONFIG} ext::auth::AuthConfig::auth_signing_key := "${process.env.GEL_AUTH_SIGNING_KEY}";
-${SET_CONFIG} ext::auth::AuthConfig::app_name := "${process.env.GEL_AUTH_APP_NAME}";
-${SET_CONFIG} ext::auth::AuthConfig::brand_color := "${process.env.GEL_AUTH_APP_BRAND_COLOR}";
-${SET_CONFIG} ext::auth::AuthConfig::logo_url := "${process.env.GEL_AUTH_LOGO_URL}";
-${SET_CONFIG} ext::auth::AuthConfig::dark_logo_url := "${process.env.GEL_AUTH_DARK_LOGO_URL}";
+${SET_CONFIG} ext::auth::AuthConfig::auth_signing_key := "${process.env.VITE_GEL_AUTH_SIGNING_KEY}";
+${SET_CONFIG} ext::auth::AuthConfig::app_name := "${process.env.VITE_GEL_AUTH_APP_NAME}";
+${SET_CONFIG} ext::auth::AuthConfig::brand_color := "${process.env.VITE_GEL_AUTH_APP_BRAND_COLOR}";
+${SET_CONFIG} ext::auth::AuthConfig::logo_url := "${process.env.VITE_GEL_AUTH_LOGO_URL}";
+${SET_CONFIG} ext::auth::AuthConfig::dark_logo_url := "${process.env.VITE_GEL_AUTH_DARK_LOGO_URL}";
 ${SET_CONFIG} ext::auth::AuthConfig::allowed_redirect_urls := {
   "${baseUrl}",
 };
@@ -33,15 +33,15 @@ ${SET_CONFIG} ext::auth::AuthConfig::allowed_redirect_urls := {
 
 const SETUP_UI_CONFIG = `
 ${INSERT_CONFIG} ext::auth::UIConfig {
-  redirect_to := "${new URL("auth/builtin/callback", baseUrl)}",
-  redirect_to_on_signup := "${new URL("auth/builtin/callback?isSignUp=true", baseUrl)}",
+  redirect_to := "${new URL(process.env.VITE_GEL_AUTH_ROUTE+"/builtin/callback", baseUrl)}",
+  redirect_to_on_signup := "${new URL(process.env.VITE_GEL_AUTH_ROUTE+"/builtin/callback?isSignUp=true", baseUrl)}",
 };
 `;
 
 // https://docs.geldata.com/reference/auth/email_password
 const SETUP_EMAIL_PASSWORD_PROVIDER = `
 ${INSERT_CONFIG} ext::auth::EmailPasswordProviderConfig {
-  require_verification := ${stringToBool(process.env.GEL_AUTH_EMAIL_VERIFICATION)},
+  require_verification := ${stringToBool(process.env.VITE_GEL_AUTH_EMAIL_VERIFICATION)},
 };
   `;
 
@@ -49,16 +49,16 @@ ${INSERT_CONFIG} ext::auth::EmailPasswordProviderConfig {
 // https://docs.geldata.com/reference/auth#configuring-smtp
 const SETUP_SMTP_CONFIG = `
 ${INSERT_CONFIG} cfg::SMTPProviderConfig {
-  name := "${process.env.GEL_SMTP_NAME}",
-  sender := "${process.env.GEL_SMTP_SENDER}",
-  host := "${process.env.GEL_SMTP_HOST}",
-  port := ${Number(process.env.GEL_SMTP_PORT)},
-  security := "${process.env.GEL_SMTP_SECURITY}",
-  validate_certs := <bool>${stringToBool(process.env.GEL_SMTP_VALIDATE_CERTS)},
-  username := "${process.env.GEL_SMTP_USERNAME}",
-  password := "${process.env.GEL_SMTP_PASSWORD}",
+  name := "${process.env.VITE_GEL_SMTP_NAME}",
+  sender := "${process.env.VITE_GEL_SMTP_SENDER}",
+  host := "${process.env.VITE_GEL_SMTP_HOST}",
+  port := ${Number(process.env.VITE_GEL_SMTP_PORT)},
+  security := "${process.env.VITE_GEL_SMTP_SECURITY}",
+  validate_certs := <bool>${stringToBool(process.env.VITE_GEL_SMTP_VALIDATE_CERTS)},
+  username := "${process.env.VITE_GEL_SMTP_USERNAME}",
+  password := "${process.env.VITE_GEL_SMTP_PASSWORD}",
 };
-${SET_CONFIG} current_email_provider_name := "${process.env.GEL_SMTP_NAME}";
+${SET_CONFIG} current_email_provider_name := "${process.env.VITE_GEL_SMTP_NAME}";
 `;
 
 async function main() {

@@ -12,7 +12,8 @@
 项目目录说明:
 - dbschema - Gel schema and migrations
 - gel.toml - Gel configuration
-- **src/lib/auth.ts** - Gel ClientAuth Helper
+- `src/gel/client.ts` -  Gel client.
+- `src/gel/clientAuth.ts` - A ClientAuth object which you can use in your components to get OAuth, BuiltinUI and signout URLs.
 - `src/lib/server/gel.ts` - Gel Client
 - `package.json` - npm dependencies
 - `pnpm-lock.yaml` - pnpm lockfile
@@ -70,31 +71,8 @@ gel ui  # {host}:{port}/ui/{branch}/auth
 5. Generate types ***pnpm generate:all***
 6. Start development server.
 
-# sv
-
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm run dev
 ```
 
 ## Building

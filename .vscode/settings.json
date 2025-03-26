@@ -6,6 +6,7 @@
         "primaryhover",
         "primarylight",
         "STARTTLS",
-        "teamplate"
+        "teamplate",
+        "vercel"
     ]
 }
