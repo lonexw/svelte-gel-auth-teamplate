@@ -37,8 +37,8 @@ module default {
     access policy admin_has_full_access
       allow all
       using (global current_user.userRole ?= Role.admin);
-    access policy everyone_insert_only
-      allow insert;
+    access policy everyone_select_insert_only
+      allow select, insert;
   }
 
   type Item {

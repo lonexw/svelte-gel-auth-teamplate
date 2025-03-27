@@ -11,7 +11,7 @@
 - pnpm & vite for build
 
 项目目录说明:
-- `dbschema` - Gel schema and migrations.
+- `dbschema` - Gel schema and migrations, and query builder API.(Auto Generated)
 - `deploy/` - Deploy scripts.
 - `gel.toml` - Gel configuration.
 - `src/lib/components` - UI Components.
@@ -60,15 +60,14 @@
     VITE_GEL_INSTANCE=
     GEL_SECRET_KEY=
     ```
-    优先级顺序为, 如果有配置 Gel Cloud, 优先使用, 然后检查 VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE 是否有配置, 最后检查本地数据库配置;
+    优先级顺序为, 如果有配置 `Gel Cloud`, 优先使用, 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置, 最后检查本地数据库配置;
+    
 3. Initialize Gel Database
 
-    运行之前查看 `.env.example` 的环境变量示例, 根据项目实际情况修改;
-
-    该脚本会自动检查数据库状态, 运行迁移文件并初始化 Auth 配置信息:
+    该脚本会自动检查数据库状态, 运行迁移文件并初始化 Auth 配置信息, 运行之前查看 `.env.example` 的环境变量示例, 根据项目实际情况修改;
 
     ```bash
-    ./deploy/maybe-initialize-database.sh
+    bash ./deploy/maybe-initialize-database.sh
     ```
 
 4. Set up Gel Auth Config

@@ -27,11 +27,11 @@ export async function newAccount({
   await client.query(
     `
     with identity := (select ext::auth::Identity filter .id = <uuid>$identity_id),
+      email := (select ext::auth::EmailFactor filter .identity = identity).email
     insert User {
       identity := identity,
-      name := <optional str>$username ?? (
-        select ext::auth::EmailFactor filter .identity = identity
-      ).email,
+      name := <optional str>$username ?? email,
+      email := email,
       userRole := 'admin',
     } unless conflict on .identity`,
     {

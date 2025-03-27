@@ -1,7 +1,7 @@
 <script lang="ts">
-  import clientAuth from "$lib/auth";
+  import clientAuth from "$lib/auth"
 
-  let { data } = $props();
+  let { data } = $props()
 </script>
 
 <div class="tabs tabs-lift m-3">
