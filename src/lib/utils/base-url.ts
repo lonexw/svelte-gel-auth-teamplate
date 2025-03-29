@@ -7,11 +7,11 @@ export function getBaseUrl(): string {
   baseUrl = "http://localhost:5173";
 
   try {
-    const isVercel = import.meta.env.VERCEL === "1";
+    const isVercel = process.env.VERCEL === "1";
     if (isVercel) {
-      const vercelEnv = import.meta.env.VERCEL_ENV!;
-      const vercelPreviewUrl = import.meta.env.VERCEL_BRANCH_URL!;
-      const vercelProductionUrl = import.meta.env.VERCEL_PROJECT_PRODUCTION_URL!;
+      const vercelEnv = process.env.VERCEL_ENV!;
+      const vercelPreviewUrl = process.env.VERCEL_BRANCH_URL!;
+      const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL!;
 
       if (vercelEnv === "preview") {
         baseUrl = `https://${vercelPreviewUrl}`;

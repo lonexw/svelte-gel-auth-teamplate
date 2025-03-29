@@ -20,7 +20,7 @@
       id="password"
       name="password"
       required
-      class="bg-slate-50 border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-sky-500 outline-2 focus:outline focus:bg-white"
+      class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-sky-500 outline-2 focus:outline "
     />
     <input type="hidden" name="reset_token" bind:value={resetToken} />
     <SubmitButton label="Set new password" />

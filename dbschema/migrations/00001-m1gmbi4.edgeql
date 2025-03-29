@@ -1,4 +1,4 @@
-CREATE MIGRATION m1uy5saayshvqjog6jd275k6ojkbrxvitmsuu4ksa5lv7k6uhmiu2q
+CREATE MIGRATION m1gmbi4ruyml6kpy3jtxhqn62oph2kzuvrgewsgikp7hrg3xxiw6fa
     ONTO initial
 {
   CREATE EXTENSION pgcrypto VERSION '1.3';
@@ -28,8 +28,8 @@ CREATE MIGRATION m1uy5saayshvqjog6jd275k6ojkbrxvitmsuu4ksa5lv7k6uhmiu2q
       CREATE PROPERTY userRole: default::Role {
           SET default := 'user';
       };
-      CREATE ACCESS POLICY everyone_insert_only
-          ALLOW INSERT ;
+      CREATE ACCESS POLICY everyone_select_insert_only
+          ALLOW SELECT, INSERT ;
   };
   CREATE GLOBAL default::current_user := (std::assert_single((SELECT
       default::User

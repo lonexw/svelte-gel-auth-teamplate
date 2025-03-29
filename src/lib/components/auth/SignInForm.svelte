@@ -22,7 +22,7 @@
     name="email"
     bind:value={email}
     required
-    class="bg-slate-50 border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline focus:bg-white"
+    class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline "
   />
   <div class="flex text-sm">
     <label for="password" class="font-medium mb-1 ml-2"> Password </label>
@@ -39,7 +39,7 @@
     name="password"
     bind:value={password}
     required
-    class="bg-slate-50 border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline focus:bg-white"
+    class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline "
   />
   <SubmitButton label="Sign in" />
 

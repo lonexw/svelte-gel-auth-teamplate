@@ -3,6 +3,7 @@
         "daisyui",
         "dbschema",
         "EDGEDB",
+        "ifaces",
         "primaryhover",
         "primarylight",
         "STARTTLS",

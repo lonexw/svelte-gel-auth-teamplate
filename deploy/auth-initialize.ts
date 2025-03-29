@@ -1,8 +1,8 @@
-import { createClient } from "gel";
+import { client } from "../src/lib/gel/client";
 import { getBaseUrl } from "../src/lib/utils/base-url";
 
-const client = createClient();
 const baseUrl = getBaseUrl();
+const authRoute = process.env.VITE_GEL_AUTH_ROUTE;
 
 const stringToBool = (str) => {
   return str.toLowerCase() === "true";
@@ -33,8 +33,8 @@ ${SET_CONFIG} ext::auth::AuthConfig::allowed_redirect_urls := {
 
 const SETUP_UI_CONFIG = `
 ${INSERT_CONFIG} ext::auth::UIConfig {
-  redirect_to := "${new URL(process.env.GEL_AUTH_ROUTE+"/builtin/callback", baseUrl)}",
-  redirect_to_on_signup := "${new URL(process.env.GEL_AUTH_ROUTE+"/builtin/callback?isSignUp=true", baseUrl)}",
+  redirect_to := "${new URL(authRoute+"/builtin/callback", baseUrl)}",
+  redirect_to_on_signup := "${new URL(authRoute+"/builtin/callback?isSignUp=true", baseUrl)}",
 };
 `;
 

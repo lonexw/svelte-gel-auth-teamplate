@@ -3,15 +3,15 @@
 本项目的目标是为搭建 Webapp 提供一个开箱即用的基础脚手架, 且直接集成了基于 [Gel Auth](https://zaizhao.github.io/core/gel/auth.html) 的用户认证方案.
 
 模板包含技术栈:
-- Svelte Kit for Svelte framework.
-- Gel for database
-- Gel Auth for authentication
-- Tailwind CSS + daisyUI for utility-first CSS framework
+- [Svelte Kit](https://svelte.dev/docs/kit/introduction) for Svelte framework.
+- [Gel](https://www.geldata.com/) for database
+- [Gel Auth](https://docs.geldata.com/reference/auth) for authentication
+- [Tailwind CSS](https://tailwindcss.com/docs/installation/using-vite) + [daisyUI](https://daisyui.com/docs/intro/) for utility-first CSS framework
 - ESLint for linting
-- pnpm & vite for build
+- pnpm & [vite](https://vite.dev/) for build
 
 项目目录说明:
-- `dbschema` - Gel schema and migrations, and query builder API.(Auto Generated)
+- `dbschema/` - Gel schema and migrations, queries and query builder API.(Auto Generated)
 - `deploy/` - Deploy scripts.
 - `gel.toml` - Gel configuration.
 - `src/lib/components` - UI Components.
@@ -49,7 +49,7 @@
     ```bash
     VITE_GEN_DSN=gel://USERNAME:PASSWORD@HOSTNAME:PORT/BRANCH
 
-    # 也可以使用 VITE_GEL_CREDENTIALS_FILE 配置
+    # 也可以使用 VITE_GEL_CREDENTIALS_FILE 配置, 推荐使用该种链接参数配置
     gel instance credentials --json > deploy/credentials.json
     VITE_GEL_CREDENTIALS_FILE=./deploy/credentials.json
     ```
@@ -60,7 +60,7 @@
     VITE_GEL_INSTANCE=
     GEL_SECRET_KEY=
     ```
-    优先级顺序为, 如果有配置 `Gel Cloud`, 优先使用, 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置, 最后检查本地数据库配置;
+    优先级顺序为, 如果有配置 `Gel Cloud`, 优先使用, 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置(DSN优先级较低), 最后检查本地数据库配置;
     
 3. Initialize Gel Database
 
@@ -81,18 +81,20 @@
     也可以通过 web 可视化界面来配置:
 
     ```bash
-    gel ui  # {host}:{port}/ui/{branch}/auth
+    npx gel ui  # {host}:{port}/ui/{branch}/auth
     ```
 
     > 比如增加 Magic Link 验证方法: https://docs.geldata.com/reference/auth/magic_link 
 
-5. Generate types 
+5. Generate types for Client Query
 
-    ```typescript
+    ```bash
     // 等同于 pnpm generate:all
     pnpm generate:edgeql && pnpm generate:interfaces
-
-    // query.ts, how to use the TypeScript query builder API.
+    ```
+    How to use the TypeScript query builder API.
+    ```typescript
+    // dbschema/queries/item.ts
     import { createClient } from "gel";
     import e from "@/dbschema/edgeql-js";
 
@@ -107,6 +109,8 @@
         .run(client);
     await e.delete(e.Deck).run(client);
     ```
+
+    更多查询方式阅读文档: [fully-typed EdgeQL queries with TypeScript](https://docs.geldata.com/reference/clients/js/querybuilder)
 
 6. Start development server.
 

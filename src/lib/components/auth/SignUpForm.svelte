@@ -28,7 +28,7 @@
     id="email"
     name="email"
     required
-    class="bg-slate-50 border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline focus:bg-white"
+    class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline "
   />
   <label for="password" class="font-medium text-sm mb-1 ml-2"> Password </label>
   <input
@@ -36,7 +36,7 @@
     id="password"
     name="password"
     required
-    class="bg-slate-50 border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline focus:bg-white"
+    class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline "
   />
   <SubmitButton label="Sign up" />
 

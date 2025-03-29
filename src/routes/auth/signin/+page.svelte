@@ -10,7 +10,7 @@
   };
   let { data } = $props();
   let form: any;
-  let params: any = data.params;
+  // let params: any = data.params;
 </script>
 
 <div class="flex items-center justify-center p-6">
@@ -25,11 +25,11 @@
 
       <div class="flex flex-col gap-4 w-[18rem]">
         <h2 class="text-xl font-semibold">OAuth</h2>
-        {#if params.oauth_error}
+        <!-- {#if params.oauth_error}
           <div class="bg-rose-100 text-rose-950 px-4 py-3 rounded-md">
             {params.oauth_error}
           </div>
-        {/if}
+        {/if} -->
 
         {#if data.providers.oauth.length}
           {#each data.providers.oauth as provider (provider.name)}

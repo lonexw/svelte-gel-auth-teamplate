@@ -1,9 +1,9 @@
-import { options } from "$lib/gel/clientAuth"
-import { client } from "$lib/gel/client"
-import serverAuth, { type AuthRouteHandlers } from "@gel/auth-sveltekit/server"
-import { redirect, type Handle } from "@sveltejs/kit"
-import { sequence } from "@sveltejs/kit/hooks"
-import { newAccount } from "$lib/gel/newAccount"
+import { options } from "$lib/gel/clientAuth";
+import { client } from "$lib/gel/client";
+import serverAuth, { type AuthRouteHandlers } from "@gel/auth-sveltekit/server";
+import { redirect, type Handle } from "@sveltejs/kit";
+import { sequence } from "@sveltejs/kit/hooks";
+import { newAccount } from "$db/queries/auth";
 
 // Create the server auth client in a handle hook.
 const { createServerRequestAuth, createAuthRouteHook } = serverAuth(

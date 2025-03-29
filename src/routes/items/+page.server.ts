@@ -1,24 +1,11 @@
-import { fail, redirect } from "@sveltejs/kit";
-import e from "$db/edgeql-js";
+import { fail } from "@sveltejs/kit";
+import { getItems, newItem, deleteItem } from "$db/queries/item";
 import { parseError } from "$lib/utils/error";
 
 export const load = async ({ locals }) => {
   const session = locals.auth.session;
-  const items = await e
-    .select(e.Item, () => ({
-      id: true,
-      name: true,
-      created: true,
-      updated: true,
-      created_by: {
-        name: true,
-        email: true,
-      },
-    }))
-    .run(session.client);
-    console.log(items);
   return {
-    items,
+    items: await getItems(session.client, {}),
   };
 };
 
@@ -26,12 +13,9 @@ export const actions = {
   newItem: async ({ request, locals }) => {
     try {
       const formData = await request.formData();
-      await locals.auth.session.client.query(
-        "with name := <str>$name insert Item { name := name }",
-        {
-          name: formData.get("name"),
-        }
-      );
+      await newItem(locals.auth.session.client, {
+        name: formData.get("name"),
+      });
     } catch (e) {
       return fail(400, {
         error: `Error signing up: ${parseError(e)}`,
@@ -41,12 +25,13 @@ export const actions = {
   deleteItem: async ({ request, locals }) => {
     try {
       const formData = await request.formData();
-      await locals.auth.session.client.query(
-        "delete Item filter .id = <uuid>$id",
-        {
-          id: formData.get("id"),
-        }
-      );
+      const res = await deleteItem(locals.auth.session.client, {
+        id: formData.get("id"),
+      });
+      if (res === null) {
+        throw new Error("没有删除该资源的权限");
+      }
+      
     } catch (e) {
       return fail(400, {
         error: `Error deleting item: ${parseError(e)}`,

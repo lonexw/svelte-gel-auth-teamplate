@@ -2,7 +2,6 @@ import { fail, redirect, type Actions } from "@sveltejs/kit"
 import { parseError } from "$lib/utils/error"
 
 export const load = async ({ locals, params }) => ({
-  params,
   providers: await locals.auth.getProvidersInfo(),
 })
 

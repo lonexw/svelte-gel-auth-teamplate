@@ -1,8 +1,9 @@
 <script lang="ts">
-  let { data } = $props();
+  let { data, form } = $props();
 </script>
 
 <div class="p-6">
+  <div>{form?.error}</div>
   <div class="flex justify-between items-center w-full">
     <h1>Items [{data.items.length}]</h1>
     <a href="/items/new" class="btn btn-primary"> + New Item </a>

@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@gel/auth-sveltekit": "^0.3.0",
 		"@tailwindcss/vite": "^4.0.15",
+		"dotenv": "^16.4.7",
 		"gel": "^2.0.1",
 		"tsx": "^4.19.3"
 	}
