@@ -4,6 +4,7 @@ export function getBaseUrl(): string {
   if (baseUrl !== null) {
     return baseUrl;
   }
+
   baseUrl = "http://localhost:5173";
 
   try {

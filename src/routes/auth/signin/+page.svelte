@@ -8,8 +8,7 @@
     "builtin::oauth_github": "github",
     "builtin::oauth_google": "google",
   };
-  let { data } = $props();
-  let form: any;
+  let { data, form } = $props();
   // let params: any = data.params;
 </script>
 

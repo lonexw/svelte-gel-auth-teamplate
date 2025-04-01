@@ -1,8 +1,7 @@
-import 'dotenv/config'
 import { createClient, type ConnectOptions } from 'gel';
 
 let options: ConnectOptions = {
-    tlsSecurity: process.env.NODE_ENV === "development" ? "insecure" : undefined,
+    tlsSecurity: process.env.NODE_ENV === "development" ? "insecure" : 'insecure',
 }
 
 // 1. Connect to instance on Gel Cloud 
@@ -30,6 +29,5 @@ if (process.env.GEL_DSN) {
         ...options
     }
 }
-console.log(options)
 
 export const client = createClient(options)

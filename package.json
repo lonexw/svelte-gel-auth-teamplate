@@ -1,6 +1,6 @@
 {
 	"name": "svelte-gel-auth-teamplate",
-	"packageManager": "pnpm@10.6.4",
+	"packageManager": "bun@1.2.7",
 	"private": true,
 	"version": "0.1.0",
 	"type": "module",
@@ -11,14 +11,16 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"auth:setup": "npx tsx --env-file=.env ./deploy/auth-initialize.ts",
-		"generate:edgeql": "pnpm exec generate edgeql-js",
-		"generate:interfaces": "pnpm exec generate interfaces",
-		"generate:all": "pnpm generate:edgeql && pnpm generate:interfaces"
+		"auth:setup": "bun run ./deploy/auth-initialize.ts",
+		"generate:edgeql": "bunx generate edgeql-js",
+		"generate:interfaces": "bunx generate interfaces",
+		"generate:all": "bun generate:edgeql && bun generate:interfaces"
 	},
 	"devDependencies": {
 		"@gel/generate": "^0.6.2",
 		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/adapter-node": "^5.2.12",
+		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/postcss": "^4.0.15",
@@ -40,7 +42,6 @@
 	"dependencies": {
 		"@gel/auth-sveltekit": "^0.3.0",
 		"@tailwindcss/vite": "^4.0.15",
-		"dotenv": "^16.4.7",
 		"gel": "^2.0.1",
 		"tsx": "^4.19.3"
 	}

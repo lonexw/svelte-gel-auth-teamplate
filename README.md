@@ -1,4 +1,4 @@
-# Svelte Kit & Gel Auth template for Webapp
+# SvelteKit & Gel Auth template for Webapp
 
 本项目的目标是为搭建 Webapp 提供一个开箱即用的基础脚手架, 且直接集成了基于 [Gel Auth](https://zaizhao.github.io/core/gel/auth.html) 的用户认证方案.
 
@@ -7,8 +7,8 @@
 - [Gel](https://www.geldata.com/) for database
 - [Gel Auth](https://docs.geldata.com/reference/auth) for authentication
 - [Tailwind CSS](https://tailwindcss.com/docs/installation/using-vite) + [daisyUI](https://daisyui.com/docs/intro/) for utility-first CSS framework
-- ESLint for linting
-- pnpm & [vite](https://vite.dev/) for build
+- [ESLint](http://eslint.org/) for linting
+- [bun](https://bun.sh/) & [vite](https://vite.dev/) for build
 
 项目目录说明:
 - `dbschema/` - Gel schema and migrations, queries and query builder API.(Auto Generated)
@@ -31,27 +31,28 @@
 
     ```bash
     git clone https://github.com/lonexw/svelte-gel-auth-teamplate.git
-    cd svelte-gel-auth-teamplate && pnpm i
+    cd svelte-gel-auth-teamplate && bun i # 需要安装 bun 包管理工具 🔧
     ```
 
 2. Install Gel CLI
 
     在本地安装 Gel 数据库的[命令行工具](https://zaizhao.github.io/core/gel/cli.html), 方便本地开发数据库的管理.
 
-    本项目提供了已启用 auth 扩展的数据库模型示例文件 **dbschema/**, 你可以以此为基础来扩展开发, 初始化本地数据库实例:
+    本项目提供已启用 auth 扩展的数据库模型示例文件 **dbschema/**, 你可以以此为基础来扩展开发, 初始化本地数据库实例:
 
     ```bash
-    npx gel project init
+    bunx gel project init
     ```
 
-    也可以使用独立的项目来管理数据层逻辑, 在环境变量中配置项目关联实例即可:
+    也可以使用独立的项目来管理数据层逻辑, 在环境变量中配置项目关联远程实例即可:
 
     ```bash
     VITE_GEN_DSN=gel://USERNAME:PASSWORD@HOSTNAME:PORT/BRANCH
 
     # 也可以使用 VITE_GEL_CREDENTIALS_FILE 配置, 推荐使用该种链接参数配置
-    gel instance credentials --json > deploy/credentials.json
     VITE_GEL_CREDENTIALS_FILE=./deploy/credentials.json
+    # 如何获取数据库实例的认证信息 
+    gel instance credentials --json > deploy/credentials.json
     ```
 
     或者你打算使用 [Gel Cloud](https://docs.geldata.com/cloud) 提供的实例:
@@ -60,7 +61,11 @@
     VITE_GEL_INSTANCE=
     GEL_SECRET_KEY=
     ```
-    优先级顺序为, 如果有配置 `Gel Cloud`, 优先使用, 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置(DSN优先级较低), 最后检查本地数据库配置;
+
+    优先级顺序为:
+    - 如果有配置 `Gel Cloud`, 优先使用 cloud 提供的实例
+    - 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置(DSN优先级较低)
+    - 最后使用本地数据库配置;
     
 3. Initialize Gel Database
 
@@ -75,13 +80,13 @@
     可以快速初始化 auth 相关配置, 默认会启用 **email+password** 的验证方式:
 
     ```bash
-    pnpm run auth:setup
+    bun run auth:setup
     ```
 
     也可以通过 web 可视化界面来配置:
 
     ```bash
-    npx gel ui  # {host}:{port}/ui/{branch}/auth
+    bunx gel ui  # {host}:{port}/ui/{branch}/auth
     ```
 
     > 比如增加 Magic Link 验证方法: https://docs.geldata.com/reference/auth/magic_link 
@@ -89,8 +94,8 @@
 5. Generate types for Client Query
 
     ```bash
-    // 等同于 pnpm generate:all
-    pnpm generate:edgeql && pnpm generate:interfaces
+    // 等同于 bun generate:edgeql && bun generate:interfaces
+    bun run generate:all
     ```
     How to use the TypeScript query builder API.
     ```typescript
@@ -110,12 +115,12 @@
     await e.delete(e.Deck).run(client);
     ```
 
-    更多查询方式阅读文档: [fully-typed EdgeQL queries with TypeScript](https://docs.geldata.com/reference/clients/js/querybuilder)
+    更多查询示例阅读文档: [fully-typed EdgeQL queries with TypeScript](https://docs.geldata.com/reference/clients/js/querybuilder)
 
 6. Start development server.
 
     ```bash
-    pnpm run dev
+    bun run dev
     ```
 
 ## Building
@@ -123,9 +128,17 @@
 To create a production version of your app:
 
 ```bash
-npm run build
+bun run build
 ```
 
-You can preview the production build with `npm run preview`.
+You can preview the production build with `bun run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## 实际的项目案例
+
+- 企业官网
+- Sports Match
+- AI Chatbot
+- 招聘开源运营平台
+- Shop Member App
