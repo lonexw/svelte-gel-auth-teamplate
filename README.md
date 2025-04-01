@@ -36,7 +36,7 @@
 
 2. Install Gel CLI
 
-    在本地安装 Gel 数据库的[命令行工具](https://zaizhao.github.io/core/gel/cli.html), 方便本地开发数据库的管理.
+    在本地安装 Gel 数据库的[命令行工具](https://zaizhao.github.io/core/gel/cli.html), 方便本地开发数据库的管理(可选).
 
     本项目提供已启用 auth 扩展的数据库模型示例文件 **dbschema/**, 你可以以此为基础来扩展开发, 初始化本地数据库实例:
 
@@ -77,10 +77,10 @@
 
 4. Set up Gel Auth Config
 
-    可以快速初始化 auth 相关配置, 默认会启用 **email+password** 的验证方式:
+    可以快速初始化重置 auth 相关配置, 默认会启用 **email+password** 的验证方式:
 
     ```bash
-    bun run auth:setup
+    bun auth:setup
     ```
 
     也可以通过 web 可视化界面来配置:
@@ -95,7 +95,7 @@
 
     ```bash
     // 等同于 bun generate:edgeql && bun generate:interfaces
-    bun run generate:all
+    bun generate:all
     ```
     How to use the TypeScript query builder API.
     ```typescript
@@ -120,7 +120,7 @@
 6. Start development server.
 
     ```bash
-    bun run dev
+    bun dev
     ```
 
 ## Building
@@ -128,10 +128,10 @@
 To create a production version of your app:
 
 ```bash
-bun run build
+bun build
 ```
 
-You can preview the production build with `bun run preview`.
+You can preview the production build with `bun preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
 
