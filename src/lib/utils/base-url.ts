@@ -5,7 +5,7 @@ export function getBaseUrl(): string {
     return baseUrl;
   }
 
-  baseUrl = "http://localhost:5173";
+  baseUrl = import.meta.env.VITE_GEL_BASE_URL ?? "http://localhost:5173";
 
   // try {
   //   const isVercel = process.env.VERCEL === "1";

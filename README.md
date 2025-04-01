@@ -21,7 +21,7 @@
 - `src/routes/` - All route defines.
 - `src/routes/identity` - Custom auth identity route defines.
 - `package.json` - npm dependencies.
-- `pnpm-lock.yaml` - pnpm lockfile
+- `bun.lock` - bun lockfile
 - `postcss.config.js` - PostCSS configuration
 - `tailwind.config.ts` - Tailwind CSS configuration
 - `tsconfig.json` - TypeScript configuration
@@ -48,10 +48,10 @@
     也可以使用独立的项目来管理数据层逻辑, 在环境变量中配置项目关联远程实例即可:
 
     ```bash
-    VITE_GEN_DSN=gel://USERNAME:PASSWORD@HOSTNAME:PORT/BRANCH
+    GEN_DSN=gel://USERNAME:PASSWORD@HOSTNAME:PORT/BRANCH
 
     # 也可以使用 VITE_GEL_CREDENTIALS_FILE 配置, 推荐使用该种链接参数配置
-    VITE_GEL_CREDENTIALS_FILE=./deploy/credentials.json
+    GEL_CREDENTIALS_FILE=./deploy/credentials.json
     # 如何获取数据库实例的认证信息 
     gel instance credentials --json > deploy/credentials.json
     ```
@@ -59,13 +59,13 @@
     或者你打算使用 [Gel Cloud](https://docs.geldata.com/cloud) 提供的实例:
 
     ```bash
-    VITE_GEL_INSTANCE=
+    GEL_INSTANCE=
     GEL_SECRET_KEY=
     ```
 
     优先级顺序为:
     - 如果有配置 `Gel Cloud`, 优先使用 cloud 提供的实例
-    - 然后检查 `VITE_GEN_DSN 和 VITE_GEL_CREDENTIALS_FILE` 是否有配置(DSN优先级较低)
+    - 然后检查 `GEN_DSN 和 GEL_CREDENTIALS_FILE` 是否有配置(DSN优先级较低)
     - 最后使用本地数据库配置;
     
 3. Initialize Gel Database
@@ -129,7 +129,7 @@
 To create a production version of your app:
 
 ```bash
-bun build
+bun run build
 ```
 
 You can preview the production build with `bun preview`.

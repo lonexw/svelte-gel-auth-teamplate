@@ -17,7 +17,7 @@ check_env_var() {
         echo "❌ $var_name is not set or empty"
         return 1
     else
-        echo "✅ $var_name is set to: ${!var_name}"
+        echo "✅ $var_name is set."
         return 0
     fi
 }
@@ -51,19 +51,25 @@ is_auth_config_empty() {
 main() {
     # Link to the database instance
     gel_instance=GEL_INSTANCE
+    gel_secret_key=GEL_SECRET_KEY
+
+    bunx gel project unlink
     if check_env_var $gel_instance; then
-        bunx gel instance link --instance ${!gel_instance} --cloud-secret-key ${!GEL_SECRET_KEY} --trust-tls-cert --non-interactive
-        instance_name=$(gel_instance)
+        instance_name=${!gel_instance}
+        # bunx gel cloud login --cloud-secret-key ${!gel_secret_key} 
+        gel project init --link --server-instance $instance_name --non-interactive --cloud-secret-key ${!gel_secret_key}
     else
         echo "NO Need to Gel Cloud Instance Config"
         gel_credentials_file=GEL_CREDENTIALS_FILE
         if check_env_var $gel_credentials_file; then
             bunx gel instance link --credentials-file ${!gel_credentials_file} --trust-tls-cert --non-interactive $instance_name
+            bunx gel project init --link --server-instance $instance_name
         else
             echo "NO Need to GEL_CREDENTIALS_FILE Config"
             gel_dsn=GEL_DSN
             if check_env_var $gel_dsn; then
                 bunx gel instance link --dsn ${!gel_dsn} --trust-tls-cert --non-interactive $instance_name
+                bunx gel project init --link --server-instance $instance_name
             else
                 instance_name=$(bunx gel project info --instance-name)
                 echo "NO Need to GEL_DSN Config"

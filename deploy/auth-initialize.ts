@@ -3,7 +3,7 @@ import { getBaseUrl } from "../src/lib/utils/base-url";
 
 const baseUrl = getBaseUrl();
 const authRoute = process.env.VITE_GEL_AUTH_ROUTE ?? "auth";
-console.log(authRoute)
+
 const stringToBool = (str) => {
   if (str === undefined) { return false }
   return str.toLowerCase() === "true";
