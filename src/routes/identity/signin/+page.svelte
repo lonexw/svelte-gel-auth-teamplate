@@ -1,5 +1,5 @@
 <script lang="ts">
-  import clientAuth from "$lib/auth";
+  import clientAuth from "$lib/gel/clientAuth";
   import SignInForm from "$lib/components/auth/SignInForm.svelte";
 
   const providerIcons = {

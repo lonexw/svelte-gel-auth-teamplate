@@ -2,9 +2,10 @@ import { client } from "../src/lib/gel/client";
 import { getBaseUrl } from "../src/lib/utils/base-url";
 
 const baseUrl = getBaseUrl();
-const authRoute = process.env.VITE_GEL_AUTH_ROUTE;
-
+const authRoute = process.env.VITE_GEL_AUTH_ROUTE ?? "auth";
+console.log(authRoute)
 const stringToBool = (str) => {
+  if (str === undefined) { return false }
   return str.toLowerCase() === "true";
 }
 
@@ -47,7 +48,7 @@ ${INSERT_CONFIG} ext::auth::EmailPasswordProviderConfig {
 
 
 // https://docs.geldata.com/reference/auth#configuring-smtp
-const SETUP_SMTP_CONFIG = `
+const SETUP_SMTP_CONFIG = process.env.GEL_SMTP_NAME ? `
 ${INSERT_CONFIG} cfg::SMTPProviderConfig {
   name := "${process.env.GEL_SMTP_NAME}",
   sender := "${process.env.GEL_SMTP_SENDER}",
@@ -59,7 +60,7 @@ ${INSERT_CONFIG} cfg::SMTPProviderConfig {
   password := "${process.env.GEL_SMTP_PASSWORD}",
 };
 ${SET_CONFIG} current_email_provider_name := "${process.env.GEL_SMTP_NAME}";
-`;
+` : '';
 
 async function main() {
   await client.execute(`

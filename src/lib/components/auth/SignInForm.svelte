@@ -17,6 +17,7 @@
 
   <label for="email" class="font-medium text-sm mb-1 ml-2"> Email </label>
   <input
+    autocomplete="email"
     type="email"
     id="email"
     name="email"
@@ -27,13 +28,14 @@
   <div class="flex text-sm">
     <label for="password" class="font-medium mb-1 ml-2"> Password </label>
     <a
-      href="/auth/forgot-password"
+      href="/identity/forgot-password"
       class="ml-auto text-teal-600 hover:text-teal-700"
     >
       Forgot password?
     </a>
   </div>
   <input
+    autocomplete="new-password"
     type="password"
     id="password"
     name="password"
@@ -45,7 +47,7 @@
 
   <div class="text-slate-500 mt-3">
     Don't have an account?{" "}
-    <a href="/auth/signup" class="text-teal-600 hover:text-teal-700">
+    <a href="/identity/signup" class="text-teal-600 hover:text-teal-700">
       Sign up
     </a>
   </div>

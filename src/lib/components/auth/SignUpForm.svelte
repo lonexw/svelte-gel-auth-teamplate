@@ -24,6 +24,7 @@
 
   <label for="email" class="font-medium text-sm mb-1 ml-2"> Email </label>
   <input
+    autocomplete="email"
     type="email"
     id="email"
     name="email"
@@ -32,6 +33,7 @@
   />
   <label for="password" class="font-medium text-sm mb-1 ml-2"> Password </label>
   <input
+    autocomplete="current-password"
     type="password"
     id="password"
     name="password"
@@ -42,7 +44,7 @@
 
   <div class="text-slate-500 mt-3">
     Already have an account?{" "}
-    <a href="/auth/signin" class="text-teal-600 hover:text-teal-700">
+    <a href="/identity/signin" class="text-teal-600 hover:text-teal-700">
       Sign in
     </a>
   </div>

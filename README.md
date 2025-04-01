@@ -19,6 +19,7 @@
 - `src/lib/gel/clientAuth.ts` - A ClientAuth object to get OAuth, BuiltinUI and signout URLs.
 - `src/lib/utils/` - Common utils functions.
 - `src/routes/` - All route defines.
+- `src/routes/identity` - Custom auth identity route defines.
 - `package.json` - npm dependencies.
 - `pnpm-lock.yaml` - pnpm lockfile
 - `postcss.config.js` - PostCSS configuration
@@ -89,7 +90,7 @@
     bunx gel ui  # {host}:{port}/ui/{branch}/auth
     ```
 
-    > 比如增加 Magic Link 验证方法: https://docs.geldata.com/reference/auth/magic_link 
+    > 比如手动配置 SMTP, 增加 OAuth 或 [Magic Link 验证方法](https://docs.geldata.com/reference/auth/magic_link) 
 
 5. Generate types for Client Query
 

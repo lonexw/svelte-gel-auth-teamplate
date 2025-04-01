@@ -1,8 +1,8 @@
 <!-- 项目说明文件, 不需要可以删除 -->
 <script lang="ts">
-  import clientAuth from "$lib/auth";
+  import clientAuth from "$lib/gel/clientAuth";
 </script>
-
+ 
 <div class="tabs tabs-lift m-3">
   <label class="tab">
     <input type="radio" name="my_tabs" checked={true} />
@@ -101,32 +101,32 @@ const authRouteHandlers: AuthRouteHandlers = {
           >(`select exists ext::auth::UIConfig`)
       </boolean></code
       ></pre>
-    <p>在 <strong>src/routes/auth</strong> 目录中定义需要的路由:</p>
+    <p>在 <strong>src/routes/identity</strong> 目录中定义需要的路由:</p>
     <ul class="list-disc pl-4">
       <li>
-        <a href="/auth/signin" class="btn-link" data-sveltekit-reload
-          >登入 /auth/signin</a
+        <a href="/identity/signin" class="btn-link" data-sveltekit-reload
+          >登入 /identity/signin</a
         >
       </li>
       <li>
-        <a href="/auth/signup" class="btn-link" data-sveltekit-reload
-          >注册 /auth/signup</a
+        <a href="/identity/signup" class="btn-link" data-sveltekit-reload
+          >注册 /identity/signup</a
         >
       </li>
       <li>
-        <a href="/auth/forgot-password" class="btn-link" data-sveltekit-reload
-          >忘记密码 /auth/forgot-password</a
+        <a href="/identity/forgot-password" class="btn-link" data-sveltekit-reload
+          >忘记密码 /identity/forgot-password</a
         >
       </li>
       <li>
-        <a href="/auth/reset-password" class="btn-link" data-sveltekit-reload
-          >重置密码 /auth/reset-password</a
+        <a href="/identity/reset-password" class="btn-link" data-sveltekit-reload
+          >重置密码 /identity/reset-password</a
         >
       </li>
       <li>
-        <form action="/auth/signout" method="post">
+        <form action="/identity/signout" method="post">
           <button class="btn btn-outline" type="submit">
-            登出 POST /auth/signout
+            登出 POST /identity/signout
           </button>
         </form>
       </li>

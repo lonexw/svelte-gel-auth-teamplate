@@ -1,7 +1,26 @@
 #!/usr/bin/env bash
 set -o errexit
 set -o pipefail
-set -o nounset
+# set -o nounset
+
+# Load .env file if it exists
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+else
+    echo ".env file not found"
+fi
+
+# Function to check if a variable exists and is not empty
+check_env_var() {
+    local var_name="$1"
+    if [ -z "${!var_name}" ]; then
+        echo "❌ $var_name is not set or empty"
+        return 1
+    else
+        echo "✅ $var_name is set to: ${!var_name}"
+        return 0
+    fi
+}
 
 timestamp=$(date +%s)
 instance_name="sv-gel-auth-$timestamp"
@@ -31,7 +50,27 @@ is_auth_config_empty() {
 
 main() {
     # Link to the database instance
-    bunx gel instance link --credentials-file ./deploy/credentials.json --trust-tls-cert --non-interactive $instance_name
+    gel_instance=GEL_INSTANCE
+    if check_env_var $gel_instance; then
+        bunx gel instance link --instance ${!gel_instance} --cloud-secret-key ${!GEL_SECRET_KEY} --trust-tls-cert --non-interactive
+        instance_name=$(gel_instance)
+    else
+        echo "NO Need to Gel Cloud Instance Config"
+        gel_credentials_file=GEL_CREDENTIALS_FILE
+        if check_env_var $gel_credentials_file; then
+            bunx gel instance link --credentials-file ${!gel_credentials_file} --trust-tls-cert --non-interactive $instance_name
+        else
+            echo "NO Need to GEL_CREDENTIALS_FILE Config"
+            gel_dsn=GEL_DSN
+            if check_env_var $gel_dsn; then
+                bunx gel instance link --dsn ${!gel_dsn} --trust-tls-cert --non-interactive $instance_name
+            else
+                instance_name=$(bunx gel project info --instance-name)
+                echo "NO Need to GEL_DSN Config"
+            fi
+        fi
+    fi
+    
     # Check if the schema is empty
     if is_schema_empty; then
         echo "Schema is empty. Running migrations..."

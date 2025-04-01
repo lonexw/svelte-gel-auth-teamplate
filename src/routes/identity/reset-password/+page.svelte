@@ -17,7 +17,7 @@
           class="bg-rose-100 text-rose-950 px-4 py-3 rounded-md mb-3 w-[22rem]"
         >
           Reset token is invalid, it may have expired.{" "}
-          <a href="/forgot-password" class="text-sky-600">
+          <a href="/identity/forgot-password" class="text-sky-600">
             Try sending another reset email
           </a>
         </div>

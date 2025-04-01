@@ -1,6 +1,6 @@
 <script lang="ts">
   import "../app.css"
-  import clientAuth from "$lib/auth"
+  import clientAuth from "$lib/gel/clientAuth"
 
   let { children, data } = $props()
 </script>
