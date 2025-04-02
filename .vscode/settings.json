@@ -4,11 +4,14 @@
         "daisyui",
         "dbschema",
         "EDGEDB",
+        "emailpassword",
         "ifaces",
+        "PKCE",
         "primaryhover",
         "primarylight",
         "STARTTLS",
         "teamplate",
-        "vercel"
+        "vercel",
+        "webauthn"
     ]
 }

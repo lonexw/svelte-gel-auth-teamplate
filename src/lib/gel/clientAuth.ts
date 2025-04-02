@@ -1,10 +1,9 @@
 import createClientAuth, 
-    { type AuthOptions } from "@gel/auth-sveltekit/client"
-import { getBaseUrl } from "../utils/base-url";
+    { type AuthOptions } from "./auth-sveltekit/client"
 
 // Auth options
 export const options: AuthOptions = {
-    baseUrl: getBaseUrl(),  // The url of your application
+    baseUrl: import.meta.env.VITE_GEL_BASE_URL ?? 'http://localhost:5173',
     // The path to the auth route handlers, defaults to 'auth'
     authRoutesPath: import.meta.env.VITE_GEL_AUTH_ROUTE ?? 'auth',
     passwordResetPath: '/reset-password'

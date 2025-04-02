@@ -16,7 +16,7 @@
       <li><a href={clientAuth.getBuiltinUISignUpUrl()} class="btn btn-dash btn-warning" data-sveltekit-reload>注册</a></li>
 			{:else}
 			<li><a href="/items" class="btn btn-dash btn-primary">资源</a></li>
-			<li><a href={clientAuth.getSignoutUrl()} class="btn btn-dash">登出</a></li>
+			<li><a href={clientAuth.getSignoutUrl()} class="btn btn-dash" data-sveltekit-reload>登出</a></li>
 			{/if}
     </ul>
   </div>

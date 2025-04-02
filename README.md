@@ -15,6 +15,7 @@
 - `deploy/` - Deploy scripts.
 - `gel.toml` - Gel configuration.
 - `src/lib/components` - UI Components.
+- `src/lib/gel/auth-sveltekit` -  @gel/auth-sveltekit local version
 - `src/lib/gel/client.ts` -  Gel query client.
 - `src/lib/gel/clientAuth.ts` - A ClientAuth object to get OAuth, BuiltinUI and signout URLs.
 - `src/lib/utils/` - Common utils functions.
@@ -134,7 +135,11 @@ bun run build
 
 You can preview the production build with `bun preview`.
 
+ORIGIN=http://localhost:4173 HOST=localhost PORT=4173 node build
+
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+https://render.com/
 
 ## 实际的项目案例
 

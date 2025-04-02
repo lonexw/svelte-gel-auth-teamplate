@@ -1,6 +1,6 @@
 import { options } from "$lib/gel/clientAuth";
 import { client } from "$lib/gel/client";
-import serverAuth, { type AuthRouteHandlers } from "@gel/auth-sveltekit/server";
+import serverAuth, { type AuthRouteHandlers } from "$lib/gel/auth-sveltekit/server";
 import { redirect, type Handle } from "@sveltejs/kit";
 import { sequence } from "@sveltejs/kit/hooks";
 import { newAccount } from "$db/queries/auth";
@@ -24,6 +24,7 @@ const authRouteHandlers: AuthRouteHandlers = {
     redirect(303, "/");
   },
   async onBuiltinUICallback({ error, tokenData, provider, isSignUp }) {
+    console.log('test auth callback')
     if (error) {
       redirect(
         303,
@@ -74,5 +75,5 @@ const authRouteHandlers: AuthRouteHandlers = {
 // invoke it inside sequence
 export const handle = sequence(
   createServerAuthClient,
-  createAuthRouteHook(authRouteHandlers)
+  createAuthRouteHook(authRouteHandlers),
 );

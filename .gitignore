@@ -15,12 +15,13 @@ Thumbs.db
 # Env
 .env
 .env.*
-deploy/credentials.json
 !.env.example
 !.env.test
+
+# Deploy
+deploy/credentials.json
+dbschema/edgeql-js
 
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-
-dbschema/edgeql-js

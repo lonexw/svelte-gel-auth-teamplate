@@ -1,10 +1,10 @@
-let baseUrl: string | null = null;
+let baseUrl: string;
 
 export function getBaseUrl(): string {
   if (baseUrl !== null) {
     return baseUrl;
   }
-
+  
   baseUrl = import.meta.env.VITE_GEL_BASE_URL ?? "http://localhost:5173";
 
   // try {
