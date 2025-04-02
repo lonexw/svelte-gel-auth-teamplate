@@ -4,7 +4,7 @@
     "": {
       "name": "svelte-gel-auth-teamplate",
       "dependencies": {
-        "@gel/auth-core": "^0.3.0",
+        "@gel/auth-sveltekit": "^0.3.0",
         "dotenv": "^16.4.7",
         "gel": "^2.0.1",
       },
@@ -85,6 +85,8 @@
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.24.2", "", { "os": "win32", "cpu": "x64" }, "sha512-7VTgWzgMGvup6aSqDPLiW5zHaxYJGTO4OokMjIlrCtf+VpEL+cXKtCvg723iguPYI5oaUNdS+/V7OU2gvXVWEg=="],
 
     "@gel/auth-core": ["@gel/auth-core@0.3.0", "", { "dependencies": { "jwt-decode": "^4.0.0" }, "peerDependencies": { "gel": "^2.0.0" } }, "sha512-fJfKculs4AmiyTRABTqlBbC54thmStYL+PS/sZ/ORIOv0POAwQp6JraFWGEl3WAekGmXjWrWAQX5Bb4vrNRFJw=="],
+
+    "@gel/auth-sveltekit": ["@gel/auth-sveltekit@0.3.0", "", { "dependencies": { "@gel/auth-core": "^0.3.0-rc" }, "peerDependencies": { "gel": "^2.0.0" } }, "sha512-bz4hzEHE/9VPmGHbwrnncczJpm6ZnAl3zovOd48qV2SKnqg44ByWfvut4oWZW8lYQKA7PjlTBvUrd50LzEWViA=="],
 
     "@gel/generate": ["@gel/generate@0.6.2", "", { "dependencies": { "@iarna/toml": "^2.2.5", "debug": "^4.3.4" }, "peerDependencies": { "gel": "^2.0.1" }, "bin": { "generate": "dist/cli.js" } }, "sha512-Ew+lDLPi1wRyH7XhmUzDAYDGQ4Eu8pgP5DoIvCKPbc/uQYc2zIrTkaxGzoPN5MV+TwqgUNOvthW/38vzP0+/GA=="],
 

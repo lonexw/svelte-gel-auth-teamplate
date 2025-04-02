@@ -1,31 +1,32 @@
 import type {
-    BuiltinProviderNames,
-    TokenData,
-    Client,
-  } from "@gel/auth-sveltekit/server";
-  // import { Octokit } from "@octokit/core";
-  
-  export async function newAccount({
-    client,
-    tokenData,
-    provider,
-  }: {
-    client: Client;
-    tokenData: TokenData;
-    provider?: BuiltinProviderNames;
-  }) {
-    let username: string | null = null;
-  
-    //   if (tokenData.provider_token && provider === "builtin::oauth_github") {
-    //     const { data } = await new Octokit({
-    //       auth: tokenData.provider_token,
-    //     }).request("get /user");
-  
-    //     username = data.login;
-    //   }
-  
-    await client.query(
-      `
+  BuiltinProviderNames,
+  TokenData,
+  Client,
+} from "$lib/gel/auth-sveltekit/server";
+// import { client } from "$lib/gel/client";
+// import { Octokit } from "@octokit/core";
+
+export async function newAccount({
+  client,
+  tokenData,
+  provider,
+}: {
+  client: Client;
+  tokenData: TokenData;
+  provider?: BuiltinProviderNames;
+}) {
+  let username: string | null = null;
+
+  //   if (tokenData.provider_token && provider === "builtin::oauth_github") {
+  //     const { data } = await new Octokit({
+  //       auth: tokenData.provider_token,
+  //     }).request("get /user");
+
+  //     username = data.login;
+  //   }
+
+  await client.query(
+    `
       with identity := (select ext::auth::Identity filter .id = <uuid>$identity_id),
         email := (select ext::auth::EmailFactor filter .identity = identity).email
       insert User {
@@ -34,10 +35,24 @@ import type {
         email := email,
         userRole := 'user',
       } unless conflict on .identity`,
-      {
-        identity_id: tokenData.identity_id,
-        username: username,
-      }
-    );
-  }
-  
+    {
+      identity_id: tokenData.identity_id,
+      username: username,
+    }
+  );
+}
+
+export async function checkUIEnabled(client: Client): Promise<boolean> {
+  return await client.queryRequiredSingle<boolean>(
+    `select exists ext::auth::UIConfig`
+  );
+}
+
+export async function getEmailInfo(client: Client): Promise<any> {
+  return await client.querySingle(
+    `
+    select ext::auth::EmailFactor { id, email, created_at, verified_at } 
+      filter .identity = global ext::auth::ClientTokenIdentity
+    `
+  );
+}

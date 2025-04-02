@@ -1,5 +1,6 @@
 import { options } from "$lib/gel/clientAuth";
 import { client } from "$lib/gel/client";
+// import serverAuth, { type AuthRouteHandlers } from "@gel/auth-sveltekit/server";
 import serverAuth, { type AuthRouteHandlers } from "$lib/gel/auth-sveltekit/server";
 import { redirect, type Handle } from "@sveltejs/kit";
 import { sequence } from "@sveltejs/kit/hooks";
@@ -24,7 +25,6 @@ const authRouteHandlers: AuthRouteHandlers = {
     redirect(303, "/");
   },
   async onBuiltinUICallback({ error, tokenData, provider, isSignUp }) {
-    console.log('test auth callback')
     if (error) {
       redirect(
         303,
@@ -33,7 +33,7 @@ const authRouteHandlers: AuthRouteHandlers = {
         )}`
       );
     }
-
+    
     if (!tokenData) {
       redirect(
         303,
@@ -42,7 +42,7 @@ const authRouteHandlers: AuthRouteHandlers = {
             `Follow the link in the verification email to continue.`
         )}`
       );
-    }
+    } 
 
     if (isSignUp) {
       await newAccount({ client, tokenData, provider });
@@ -67,7 +67,6 @@ const authRouteHandlers: AuthRouteHandlers = {
     redirect(303, "/");
   },
   onSignout() {
-    console.log("signout route callback");
     redirect(301, "/");
   },
 };

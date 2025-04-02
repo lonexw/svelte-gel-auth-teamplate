@@ -36,7 +36,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"@gel/auth-core": "^0.3.0",
+		"@gel/auth-sveltekit": "^0.3.0",
 		"dotenv": "^16.4.7",
 		"gel": "^2.0.1"
 	}

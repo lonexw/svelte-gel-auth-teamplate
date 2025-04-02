@@ -1,6 +1,6 @@
-import createClientAuth, 
-    { type AuthOptions } from "./auth-sveltekit/client"
-
+// import createClientAuth, 
+//     { type AuthOptions } from "@gel/auth-sveltekit/client"
+import createClientAuth, { type AuthOptions } from "$lib/gel/auth-sveltekit/client"
 // Auth options
 export const options: AuthOptions = {
     baseUrl: import.meta.env.VITE_GEL_BASE_URL ?? 'http://localhost:5173',

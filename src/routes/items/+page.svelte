@@ -6,7 +6,11 @@
   <div>{form?.error}</div>
   <div class="flex justify-between items-center w-full">
     <h1>Items [{data.items.length}]</h1>
+    {#if data.emailInfo.verified_at }
     <a href="/items/new" class="btn btn-primary"> + New Item </a>
+    {:else}
+    <a href="#new" class="btn btn-info" aria-disabled="true">请先完成邮箱验证</a>
+    {/if}
   </div>
 
   <ul role="list" class="divide-y divide-gray-200">
