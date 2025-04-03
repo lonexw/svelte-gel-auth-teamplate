@@ -1,6 +1,7 @@
 import { client } from "../src/lib/gel/client";
+import { getBaseUrl } from "../src/lib/utils/base-url";
 
-const baseUrl = process.env.VITE_GEL_BASE_URL ?? "http://localhost:5173";
+const baseUrl = getBaseUrl(process.env.VITE_GEL_BASE_URL);
 const authRoute = process.env.VITE_GEL_AUTH_ROUTE ?? "auth";
 
 const stringToBool = (str) => {

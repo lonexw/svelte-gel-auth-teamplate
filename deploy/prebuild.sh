@@ -5,6 +5,5 @@ set -o nounset
 
 echo "Storage ready, running migrations and code generation."
 
-./maybe-initialize-database.sh
-bunx gel migrate
+bash ./maybe-initialize-database.sh
 bun generate:all
