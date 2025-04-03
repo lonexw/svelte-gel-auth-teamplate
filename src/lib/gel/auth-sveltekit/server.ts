@@ -488,7 +488,6 @@ async function handleAuthRoutes(
 ) {
   const searchParams = url.searchParams;
   const path = url.pathname.split("/").slice(2).join("/");
-
   function deleteVerifierCookie() {
     deleteCookie(cookies, config.pkceVerifierCookieName);
     deleteCookie(cookies, "edgedb-pkce-verifier");

@@ -32,7 +32,7 @@
           <a
             href={clientAuth.getSignoutUrl()}
             class="btn btn-dash"
-            data-sveltekit-reload
+            data-sveltekit-replacestate
           >
             <span>{data.emailInfo.email}{data.emailInfo.verified_at? '' : '(未验证)'}</span> 登出
           </a>

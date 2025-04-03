@@ -24,13 +24,16 @@ check_env_var() {
 
 timestamp=$(date +%s)
 instance_name="sv-gel-auth-$timestamp"
+gel_instance=GEL_INSTANCE
+gel_secret_key=GEL_SECRET_KEY
+gel_branch=GEL_BRANCH
 
 # This script is used to configure the database for the first time. It checks if the database is
 # brand new by seeing if the current schema is empty and the required auth configuration is also
 # empty. If so, it will run migrations, and configure auth.
 is_schema_empty() {
     local result
-    result=$(bunx gel migration log --from-db -I $instance_name)
+    result=$(bunx gel migration log --from-db -I $instance_name -b ${!gel_branch})
     if [ "$result" = "<no migrations>" ]; then
         return 0
     else
@@ -40,7 +43,7 @@ is_schema_empty() {
 
 is_auth_config_empty() {
     local result
-    result=$(bunx gel query "select ext::auth::signing_key_exists();" -I $instance_name)
+    result=$(bunx gel query "select ext::auth::signing_key_exists();" -I $instance_name -b ${!gel_branch})
     if [ "$result" = "true" ]; then
         return 1
     else
@@ -50,10 +53,6 @@ is_auth_config_empty() {
 
 main() {
     # Link to the database instance
-    gel_instance=GEL_INSTANCE
-    gel_secret_key=GEL_SECRET_KEY
-    gel_branch=GEL_BRANCH
-
     bunx gel project unlink
     if check_env_var $gel_instance; then
         instance_name=${!gel_instance}
@@ -81,7 +80,7 @@ main() {
     # Check if the schema is empty
     if is_schema_empty; then
         echo "Schema is empty. Running migrations..."
-        bunx gel migrate -I $instance_name -b ${!gel_secret_key}
+        bunx gel migrate -I $instance_name -b ${!gel_branch}
     else
         echo "Schema is not empty. Skipping migrations."
     fi

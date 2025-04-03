@@ -127,19 +127,129 @@
 
 ## Building
 
-To create a production version of your app:
+### 生产数据库准备
 
+无论何种部署方式, 首先需要你准备好一个远程可以访问的数据库实例, 手动或者通过命令行创建数据库分支及运行迁移文件.
+
+.env 必须的数据库配置
+```bash
+# Gel Cloud 或者是 GEN_DSN、GEL_CREDENTIALS_FILE 配置信息
+GEL_INSTANCE=
+GEL_SECRET_KEY=
+
+GEL_BRANCH=     # 默认为 main
+VITE_GEL_BASE_URL= # 部署站点访问地址
+
+# 参照 .env.example 的说明完成其它基本 auth 信息的配置, 也可以在部署完成后通过 gel ui 在浏览器页面中配置;
+```
+
+在本地关联远程实例, 创建好新分支(如需要)及运行迁移:
+```bash
+# 该脚本会自动检查是否需要运行迁移以及初始化 auth 配置
+# 默认读取 .env 文件的配置信息
+bash ./deploy/maybe-initialize-database.sh
+# 重置 auth 配置信息(如需要)
+bun run auth:setup
+```
+
+在 **.env.development** 文件中配置本地开发数据库, 在 **.env** 文件中配置生产环境数据库辅助配置远程数据库是不错的解决方案, 当然你可以在独立的数据库管理项目完成这些配置;
+
+### 本地预览生产版本
+
+To create a production version of your app:
 ```bash
 bun run build
 ```
 
-You can preview the production build with `bun preview`.
+You can preview the production build with `bun run preview`.
 
-ORIGIN=http://localhost:4173 HOST=localhost PORT=4173 node build
+```bash
+bun --env-file=.env run preview
+```
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### 使用 Node Server 部署
 
-https://render.com/
+使用 node 部署需要首先更换一下 [svelte adapter 的配置](https://svelte.dev/docs/kit/adapter-node):
+
+```javascript
+// install dependency
+bun i -D @sveltejs/adapter-node
+// svelte.config.js
+import adapter from '@sveltejs/adapter-node';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
+const config = {
+	preprocess: vitePreprocess(),
+	kit: {
+		adapter: adapter({
+			out: 'build',
+			precompress: true,
+			envPrefix: ''
+		})
+	}
+};
+```
+在本地尝试编译, 启动运行一下:
+```bash
+bun run build # generate to build/ directory
+
+# MY_CUSTOM_ORIGIN 网络有代理时需要设置, 避免跨域问题
+HOST=127.0.0.1 \
+PORT=3000 \
+ORIGIN=http://127.0.0.1:3000 \
+node --env-file=.env build/index.js
+```
+
+私有化或 docker 部署的时候可能想通过 [systemd-service](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html) 服务运行网站服务:
+
+```
+# /etc/systemd/system/app.service
+[Service]
+Environment=NODE_ENV=production IDLE_TIMEOUT=60
+ExecStart=/usr/bin/node /usr/bin/app/build
+
+# /etc/systemd/system/app.socket
+[Socket]
+ListenStream=3000
+[Install]
+WantedBy=sockets.target
+
+# bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now app.socket
+```
+
+你也可以使用高度定制的 web server 服务, 比如使用 Express:
+```javascript
+import { handler } from './build/handler.js';
+import express from 'express';
+
+const app = express();
+
+// let SvelteKit handle everything else, including serving prerendered pages and static assets
+app.use(handler);
+
+app.listen(3000, () => {
+	console.log('listening on port 3000');
+});
+```
+
+### 部署到 Vercel、render 等云服务
+
+To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+- https://svelte.dev/docs/kit/adapter-vercel
+- https://render.com/
+
+在平台部署界面配置相关的环境变量即可, 根据实际情况调整部署命令:
+
+```
+# Build Command
+bun run build
+
+# Install Command
+bun install && bun generate:all
+```
 
 ## 实际的项目案例
 
