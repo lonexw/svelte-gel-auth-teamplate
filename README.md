@@ -125,6 +125,8 @@
     bun dev
     ```
 
+    如果你在本地有运行多个本地 Gel 数据库实例项目, 开发站点都是用同样的端口地址 **http://localhost:5173** 提供服务的话, 可能会造成 cookies 混用导致 PKCE 校验失败的问题, 记得清理站点缓存和 Cookies 历史数据;
+
 ## Building
 
 ### 生产数据库准备
@@ -179,14 +181,14 @@ import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const config = {
-	preprocess: vitePreprocess(),
-	kit: {
-		adapter: adapter({
-			out: 'build',
-			precompress: true,
-			envPrefix: ''
-		})
-	}
+    preprocess: vitePreprocess(),
+    kit: {
+        adapter: adapter({
+            out: 'build',
+            precompress: true,
+            envPrefix: ''
+        })
+    }
 };
 ```
 在本地尝试编译, 启动运行一下:
@@ -230,7 +232,7 @@ const app = express();
 app.use(handler);
 
 app.listen(3000, () => {
-	console.log('listening on port 3000');
+    console.log('listening on port 3000');
 });
 ```
 
