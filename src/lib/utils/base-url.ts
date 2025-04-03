@@ -2,6 +2,7 @@ export function getBaseUrl(baseUrl: string | null | undefined = null): string {
   try {
     const isVercel = process.env.VERCEL === "1";
     if (isVercel) {
+      console.log("isVercel");
       const vercelEnv = process.env.VERCEL_ENV!;
       const vercelPreviewUrl = process.env.VERCEL_BRANCH_URL!;
       const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL!;

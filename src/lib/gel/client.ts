@@ -1,7 +1,7 @@
 import { createClient, type ConnectOptions } from 'gel';
 
 let options: ConnectOptions = {
-    tlsSecurity: process.env.NODE_ENV === "development" ? "insecure" : 'insecure',
+    tlsSecurity: process.env.NODE_ENV === "development" ? "insecure" : 'default',
 }
 
 // 1. Connect to instance on Gel Cloud 

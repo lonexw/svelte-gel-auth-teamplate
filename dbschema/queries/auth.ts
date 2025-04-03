@@ -43,16 +43,26 @@ export async function newAccount({
 }
 
 export async function checkUIEnabled(client: Client): Promise<boolean> {
-  return await client.queryRequiredSingle<boolean>(
-    `select exists ext::auth::UIConfig`
-  );
+  try {
+    return await client.queryRequiredSingle<boolean>(
+      `select exists ext::auth::UIConfig`
+    );
+  } catch (error) {
+    console.log("object type or alias 'ext::auth::UIConfig' does not exist");
+    return false;
+  }
 }
 
 export async function getEmailInfo(client: Client): Promise<any> {
-  return await client.querySingle(
-    `
-    select ext::auth::EmailFactor { id, email, created_at, verified_at } 
-      filter .identity = global ext::auth::ClientTokenIdentity
-    `
-  );
+  try {
+    return await client.querySingle(
+      `
+      select ext::auth::EmailFactor { id, email, created_at, verified_at } 
+        filter .identity = global ext::auth::ClientTokenIdentity
+      `
+    );
+  } catch (error) {
+    console.log("object type or alias 'ext::auth::EmailFactor' does not exist");
+    return null;
+  }
 }
