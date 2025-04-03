@@ -9,6 +9,7 @@ if (process.env.GEL_INSTANCE) {
     options = {
         instanceName: process.env.GEL_INSTANCE,
         secretKey: process.env.GEL_SECRET_KEY,
+        branch: process.env.GEL_BRANCH ?? "main",
         ...options
     }
 }

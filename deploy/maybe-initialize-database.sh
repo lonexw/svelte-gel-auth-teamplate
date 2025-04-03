@@ -52,11 +52,12 @@ main() {
     # Link to the database instance
     gel_instance=GEL_INSTANCE
     gel_secret_key=GEL_SECRET_KEY
+    gel_branch=GEL_BRANCH
 
     bunx gel project unlink
     if check_env_var $gel_instance; then
         instance_name=${!gel_instance}
-        bunx gel cloud login --cloud-secret-key ${!gel_secret_key} 
+        # bunx gel cloud login --cloud-secret-key ${!gel_secret_key} 
         bunx gel project init --link --server-instance $instance_name --non-interactive --cloud-secret-key ${!gel_secret_key}
     else
         echo "NO Need to Gel Cloud Instance Config"
@@ -80,7 +81,7 @@ main() {
     # Check if the schema is empty
     if is_schema_empty; then
         echo "Schema is empty. Running migrations..."
-        bunx gel migrate -I $instance_name
+        bunx gel migrate -I $instance_name -b ${!gel_secret_key}
     else
         echo "Schema is not empty. Skipping migrations."
     fi
