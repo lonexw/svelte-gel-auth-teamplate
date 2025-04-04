@@ -96,7 +96,7 @@ main() {
     # Check if the schema is empty
     if is_schema_empty; then
         echo "Schema is empty. Running migrations..."
-        bunx gel migrate -I $instance_name -b ${!gel_branch}
+        bunx gel migrate -I $instance_name -b ${gel_branch}
     else
         echo "Schema is not empty. Skipping migrations."
     fi
@@ -104,7 +104,7 @@ main() {
     # Check if auth config is empty
     if is_auth_config_empty; then
         echo "Auth config is empty. Configuring auth..."
-        bunx tsx ./deploy/auth-initialize.ts
+        bunx run ./deploy/auth-initialize.ts
     else
         echo "Auth config is not empty. Skipping auth configuration."
     fi

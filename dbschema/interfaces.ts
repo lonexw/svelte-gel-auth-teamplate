@@ -206,10 +206,10 @@ export namespace $default {
   export interface User extends std.$Object {
     "created"?: Date | null;
     "email"?: string | null;
-    "name": string;
+    "name"?: string | null;
     "updated"?: Date | null;
     "userRole"?: Role | null;
-    "identity": ext.auth.Identity;
+    "identities": ext.auth.Identity[];
   }
   export interface current_user extends User {}
 }
