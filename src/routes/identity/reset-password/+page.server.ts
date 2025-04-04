@@ -27,7 +27,7 @@ export const actions = {
       await locals.auth.emailPasswordResetPassword(formData);
     } catch (e) {
       return fail(400, {
-        error: `Error signing up: ${parseError(e)}`,
+        error: `Error reset password: ${parseError(e)}`,
       });
     }
 

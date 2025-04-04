@@ -3,14 +3,24 @@
 </script>
 
 <div class="p-6">
-  <div>{form?.error}</div>
+  {#if form?.error}
+  <div role="alert" class="alert alert-error alert-outline mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span>{form?.error}</span>
+  </div>
+  {/if}
   <div class="flex justify-between items-center w-full">
     <h1>Items [{data.items.length}]</h1>
-    {#if data.emailInfo.verified_at }
-    <a href="/items/new" class="btn btn-primary"> + New Item </a>
-    {:else}
-    <a href="#new" class="btn btn-info" aria-disabled="true">请先完成邮箱验证</a>
-    {/if}
+    <div>
+      {#if data.userProfile}
+      <a href="/items/new" class="btn btn-primary"> + New Item </a>
+        {#if !data.userProfile.emailFactor}
+        <a href="/identity/signup" class="btn btn-warning" data-sveltekit-reload>📨 绑定邮箱登录</a>
+        {/if}
+      {/if}
+    </div>
   </div>
 
   <ul role="list" class="divide-y divide-gray-200">

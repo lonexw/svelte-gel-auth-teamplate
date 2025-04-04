@@ -6,15 +6,12 @@ module default {
   global current_user := (
     assert_single((
       select User
-      filter .identity = global ext::auth::ClientTokenIdentity
+      filter (global ext::auth::ClientTokenIdentity) in .identities
     ))
   );
 
   type User {
-    required identity: ext::auth::Identity {
-      constraint exclusive;
-    };
-    required name: str;
+    name: str;
     email: str {
       constraint exclusive;
     };
@@ -31,14 +28,19 @@ module default {
       rewrite update using (datetime_of_statement());
     }
 
+    # one-to-many relationship
+    required multi identities: ext::auth::Identity {
+      constraint exclusive;
+    };
+
     access policy current_user_has_full_access
       allow all
       using (.id ?= global current_user.id);
     access policy admin_has_full_access
       allow all
       using (global current_user.userRole ?= Role.admin);
-    access policy everyone_select_insert_only
-      allow select, insert;
+    access policy everyone_select_insert_update_only
+      allow select, insert, update;
   }
 
   type Item {
@@ -62,6 +64,6 @@ module default {
       allow all
       using (.created_by ?= global current_user);
     access policy others_read_only
-      allow select, insert;
+      allow select;
   }
 }

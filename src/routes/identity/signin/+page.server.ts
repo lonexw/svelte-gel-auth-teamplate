@@ -2,6 +2,7 @@ import { fail, redirect, type Actions } from "@sveltejs/kit"
 import { parseError } from "$lib/utils/error"
 
 export const load = async ({ locals, params }) => ({
+  params: await params,
   providers: await locals.auth.getProvidersInfo(),
 })
 
@@ -12,7 +13,7 @@ export const actions = {
       await locals.auth.emailPasswordSignIn(formData)
     } catch (e) {
       return fail(400, {
-        error: `Error signing up: ${parseError(e)}`,
+        error: `Error signing in: ${parseError(e)}`,
       });
     }
 

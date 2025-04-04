@@ -8,7 +8,7 @@ export const options: AuthOptions = {
     baseUrl: getBaseUrl(import.meta.env.VITE_GEL_BASE_URL),
     // The path to the auth route handlers, defaults to 'auth'
     authRoutesPath: import.meta.env.VITE_GEL_AUTH_ROUTE ?? 'auth',
-    passwordResetPath: '/reset-password'
+    passwordResetPath: '/identity/reset-password'
 }
 console.log("auth options:", options)
 const auth = createClientAuth(options)

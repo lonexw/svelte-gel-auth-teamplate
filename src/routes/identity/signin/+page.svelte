@@ -9,7 +9,6 @@
     "builtin::oauth_google": "google",
   };
   let { data, form } = $props();
-  // let params: any = data.params;
 </script>
 
 <div class="flex items-center justify-center p-6">

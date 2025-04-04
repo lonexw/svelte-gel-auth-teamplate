@@ -2,8 +2,7 @@
   import SubmitButton from "./SubmitButton.svelte";
   import { enhance } from "$app/forms";
 
-  export let error: string | undefined;
-  export let message: string | undefined;
+  let { email=$bindable(), message, error } = $props();
 </script>
 
 <form class="flex flex-col w-[22rem]" method="post" use:enhance>
@@ -22,8 +21,9 @@
       type="email"
       id="email"
       name="email"
+      value={email}
       required
-      class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline "
+      class="border border-slate-200 rounded-lg mb-4 px-4 py-3 outline-teal-600 outline-2 focus:outline"
     />
     <SubmitButton label="Send reset email" />
   {/if}

@@ -2,10 +2,11 @@
   import { enhance } from "$app/forms";
   import SubmitButton from "./SubmitButton.svelte";
 
-  let email: string;
-  let password: string;
-
-  export let error: string | undefined;
+  let { email, password, error } : {
+    email?: string,
+    password?: string | undefined,
+    error: string | undefined
+  } = $props();
 </script>
 
 <form class="flex flex-col w-full" method="post" use:enhance>

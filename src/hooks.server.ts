@@ -21,10 +21,12 @@ const createServerAuthClient: Handle = ({ event, resolve }) => {
 // define the auth route handlers
 const authRouteHandlers: AuthRouteHandlers = {
   async onOAuthCallback({ error, tokenData, provider, isSignUp }) {
+    // console.log("onOAuthCallback");
     // TODO
     redirect(303, "/");
   },
   async onBuiltinUICallback({ error, tokenData, provider, isSignUp }) {
+    // console.log("onBuiltinUICallback", tokenData, provider, isSignUp);
     if (error) {
       redirect(
         303,

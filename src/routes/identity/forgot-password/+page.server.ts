@@ -15,13 +15,12 @@ export const actions = {
       }
 
       await locals.auth.emailPasswordSendPasswordResetEmail({ email });
-
       return {
         message: `Password reset email has been sent to '${email}'`,
       };
     } catch (e) {
       return fail(400, {
-        error: `Error signing up: ${parseError(e)}`,
+        error: `Error forget password: ${parseError(e)}`,
       });
     }
   },

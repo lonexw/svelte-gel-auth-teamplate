@@ -23,7 +23,7 @@ ${RESET_CONFIG} cfg::SMTPProviderConfig;
 
 const SETUP_AUTH_CONFIG = `
 ${SET_CONFIG} ext::auth::AuthConfig::auth_signing_key := "${process.env.GEL_AUTH_SIGNING_KEY}";
-${SET_CONFIG} ext::auth::AuthConfig::app_name := "${process.env.GEL_AUTH_APP_NAME}";
+${SET_CONFIG} ext::auth::AuthConfig::app_name := "${process.env.VITE_GEL_AUTH_APP_NAME}";
 ${SET_CONFIG} ext::auth::AuthConfig::brand_color := "${process.env.GEL_AUTH_APP_BRAND_COLOR}";
 ${SET_CONFIG} ext::auth::AuthConfig::logo_url := "${process.env.GEL_AUTH_LOGO_URL}";
 ${SET_CONFIG} ext::auth::AuthConfig::dark_logo_url := "${process.env.GEL_AUTH_DARK_LOGO_URL}";

@@ -3,11 +3,12 @@
   import clientAuth from "$lib/gel/clientAuth";
 
   let { children, data } = $props();
+  const appName = import.meta.env.VITE_GEL_AUTH_APP_NAME || "Svelte + Gel Auth Teamplate";
 </script>
 
 <div class="navbar bg-base-100 shadow-sm">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl" href="/">Svelte + Gel Auth Teamplate</a>
+    <a class="btn btn-ghost text-xl" href="/">{appName}</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
@@ -34,7 +35,10 @@
             class="btn btn-dash"
             data-sveltekit-replacestate
           >
-            <span>{data.emailInfo.email}{data.emailInfo.verified_at? '' : '(未验证)'}</span> 登出
+            <span>{data.userProfile.userRole} | 
+              {data.userProfile.name || data.userProfile.email}(
+                {data.userProfile.emailFactor?.verified_at ? "已验证" : "未验证"}
+              )</span> 登出
           </a>
         </li>
       {/if}

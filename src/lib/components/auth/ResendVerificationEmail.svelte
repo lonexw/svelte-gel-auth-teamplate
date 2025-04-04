@@ -1,9 +1,7 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
 
-  export let verificationToken: string;
-  export let error: string | undefined;
-  export let message: string | undefined;
+  let { verificationToken, error, message } = $props();
 </script>
 
 <form method="post" action="?/resendVerEmail" use:enhance>
